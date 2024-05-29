@@ -1,0 +1,63 @@
+<html lang="en">
+<script>
+    let timeout;
+    function debounced(){
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){
+            populateDiv();
+        },10);
+    }
+    function populateDiv(){
+        const a = document.getElementById("first").value;
+        const b = document.getElementById("second").value;
+        // const element = document.getElementById("finalSum")
+        // element.innerHTML = parseInt(a)+parseInt(b);
+        fetch("https://sum-server.100xdevs.com/sum?a="+a+"&b="+b)
+            .then(function(response){
+                response.text()
+                    .then(function(ans){
+                        document.getElementById("finalSum").innerHTML=ans;
+                    })
+            });
+    }
+</script>
+<body>
+    <input oninput="debounced()" id = "first" type="text" placeholder="First Number"></input><br></br>
+    <input oninput="debounced()" id = "second" type="text" placeholder="Second Number"></input><br></br>
+    <div id = "finalSum"></div>   
+</body>
+</html>
+
+<!-- https://sum-server.100xdevs.com/interest?principal=100&rate=5&time=2
+
+<!-- <html lang="en">
+<script>
+    let timeout;
+    function debounced(){
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){
+            populateDiv();
+        },1000);
+    }
+    function populateDiv(){
+        const a = document.getElementById("first").value;
+        const b = document.getElementById("second").value;
+        const c = document.getElementById("third").value;
+        // const element = document.getElementById("finalSum")
+        // element.innerHTML = parseInt(a)+parseInt(b);
+        fetch("https://sum-server.100xdevs.com/interest?principal="+a+"&rate="+b+"&time="+c)
+            .then(function(response){
+                response.text()
+                    .then(function(ans){
+                        document.getElementById("finalSum").innerHTML=ans;
+                    })
+            });
+    }
+</script>
+<body>
+    <input oninput="debounced()" id = "first" type="text" placeholder="Principal"></input><br></br>
+    <input oninput="debounced()" id = "second" type="text" placeholder="Rate"></input><br></br>
+    <input oninput="debounced()" id = "third" type="text" placeholder="Time"></input><br></br>
+    <div id = "finalSum"></div>   
+</body>
+</html> -->
